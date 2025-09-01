@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     db_user: str = os.getenv("DB_USER")
     db_password: str = os.getenv("DB_PASSWORD")
     db_name: str = os.getenv("DB_NAME")
-    cors_allow_origins: str = (
+    cors_allow_origins: list[str] = (
         list(map(lambda x: x.strip(), os.getenv("CORS_ALLOW_ORIGINS").split(",")))
         if os.getenv("CORS_ALLOW_ORIGINS")
         else ["*"]
