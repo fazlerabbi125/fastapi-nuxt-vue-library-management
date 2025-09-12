@@ -6,7 +6,10 @@ from datetime import timedelta
 
 load_dotenv()
 
+DEBUG = os.getenv("DISABLE_DEBUG", "False") != "True"
+
 class Settings(BaseSettings):
+    debug_mode: bool = DEBUG
     admin_api_key: str = os.getenv("ADMIN_API_KEY")
     jwt_access_key: str = os.getenv("JWT_ACCESS_KEY", secrets.token_hex(32))
     jwt_refresh_key: str = os.getenv("JWT_REFRESH_KEY", secrets.token_hex(32))
@@ -21,7 +24,7 @@ class Settings(BaseSettings):
     cors_allow_origins: list[str] = (
         list(map(lambda x: x.strip(), os.getenv("CORS_ALLOW_ORIGINS").split(",")))
         if os.getenv("CORS_ALLOW_ORIGINS")
-        else ["*"]
+        else (DEBUG and ["*"] or [])
     )
 
 

@@ -1,12 +1,10 @@
-# from typing import List, Optional
-from db import Base
+from database import Base
 import sqlalchemy as sa
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
-from sqlalchemy_utils import EmailType, Timestamp, generic_repr
-from ..utils.constants import UserRoles
+from sqlalchemy_utils import EmailType, Timestamp
+from utils.constants import UserRoles
 
-@generic_repr
 class User(Base, Timestamp):
     __tablename__ = "users"
 
